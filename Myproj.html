@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<style>
+		#main {
+			width: 320px;
+			height: 370px;
+			background-color: black;
+			margin: auto;
+			padding: 10px;
+			border-radius: 15px;
+			box-shadow: 0px 0px 15px #555;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+		input[type="text"] {
+			width: 90%;
+			height: 60px;
+			background-color: #ddd;
+			font-size: 28px;
+			margin-bottom: 10px;
+			text-align: right;
+			border: none;
+			padding: 10px;
+			border-radius: 10px;
+		}
+		input[type="button"] {
+			width: 20%;
+			height: 60px;
+			font-size: 24px;
+			margin: 6px;
+			border-radius: 10px;
+			border: none;
+			background-color: silver;
+			color: black;
+		}
+		#main input[type="button"]:hover {
+			background-color: #bbb;
+		}
+	</style>
+</head>
+<body>
+    <div id="main">
+		<form name="V">
+			<input type="text" name="ddd" placeholder="0"> <br>
+			<input type="button" value="1" onclick="V.ddd.value+=1">
+			<input type="button" value="2" onclick="V.ddd.value+=2">
+			<input type="button" value="3" onclick="V.ddd.value+=3">
+			<input type="button" value="+" onclick="add()">
+			<br>
+			<input type="button" value="4" onclick="V.ddd.value+=4">
+			<input type="button" value="5" onclick="V.ddd.value+=5">
+			<input type="button" value="6" onclick="V.ddd.value+=6">
+			<input type="button" value="-" onclick="sub()">
+			<br>
+			<input type="button" value="7" onclick="V.ddd.value+=7">
+			<input type="button" value="8" onclick="V.ddd.value+=8">
+			<input type="button" value="9" onclick="V.ddd.value+=9">
+			<input type="button" value="/" onclick="div()">
+			<br>
+			<input type="button" value="C" onclick="V.ddd.value=''">
+			<input type="button" value="0" onclick="V.ddd.value+=0">
+			<input type="button" value="=" onclick="calculate()">
+			<input type="button" value="x" onclick="mul()">
+		</form>
+    </div>
+
+	<script>
+		
+		function add(){
+			handleOperator('+');
+		}
+
+	
+		function sub(){
+			handleOperator('-');
+		}
+
+		
+		function div(){
+			handleOperator('/');
+		}
+
+		
+		function mul(){
+			handleOperator('*');
+		}
+
+		function handleOperator(op) {
+			let currentValue = V.ddd.value;
+			let lastChar = currentValue.charAt(currentValue.length - 1);
+			if (['+', '-', '/', '*'].includes(lastChar)) {
+				V.ddd.value = currentValue.slice(0, -1) + op;
+			} else {
+				V.ddd.value += op;
+			}
+		}
+
+
+		function calculate() {
+			try {
+				let result = eval(V.ddd.value);
+				V.ddd.value = result;
+			} catch (e) {
+				alert("Invalid expression");
+				V.ddd.value = '';
+			}
+		}
+	</script>
+</body>
+</html>
